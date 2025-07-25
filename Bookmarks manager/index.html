@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bookmark Manager</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>🔖 Bookmark Manager</h1>
+
+        <form id="bookmark-form">
+            <input type="text" id="site-name" placeholder="Website Name" required />
+            <input type="url" id="site-url" placeholder="Website URL (https://...)" required />
+            <button type="submit">Add Bookmark</button>
+        </form>
+
+        <div id="bookmarks-list"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
