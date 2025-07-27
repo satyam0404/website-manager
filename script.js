@@ -1,77 +1,65 @@
-const form = document.getElementById('bookmark-form');
-const siteNameInput = document.getElementById('site-name');
-const siteUrlInput = document.getElementById('site-url');
-const bookmarksList = document.getElementById('bookmarks-list');
+// Grab elements
+const form         = document.getElementById('bookmark-form');
+const nameInput    = document.getElementById('site-name');
+const urlInput     = document.getElementById('site-url');
+const tagsInput    = document.getElementById('site-tags');
+const searchInput  = document.getElementById('searchInput');
+const listContainer= document.getElementById('bookmarks-list');
 
-form.addEventListener('submit', (e) => {
+// 1. Save Bookmark
+form.addEventListener('submit', e => {
   e.preventDefault();
-  const name = siteNameInput.value;
-  const url = siteUrlInput.value;
+  const name = nameInput.value.trim();
+  const url  = urlInput.value.trim();
+  const tags = tagsInput.value.trim().toLowerCase();
 
-  const bookmark = { name, url };
+  if (!name || !url) return;
 
-  let bookmarks = JSON.parse(localStorage.getItem('bookmarks')) || [];
+  const bookmark = { name, url, tags };
+  const bookmarks = JSON.parse(localStorage.getItem('bookmarks')) || [];
   bookmarks.push(bookmark);
   localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
 
-  siteNameInput.value = '';
-  siteUrlInput.value = '';
-
-  displayBookmarks();
+  form.reset();
+  displayBookmarks(bookmarks);
 });
 
-function displayBookmarks() {
-  const bookmarks = JSON.parse(localStorage.getItem('bookmarks')) || [];
-  bookmarksList.innerHTML = '';
-
-  bookmarks.forEach((bookmark, index) => {
+// 2. Display (all or filtered)  
+function displayBookmarks(bookmarks = null) {
+  const items = bookmarks || JSON.parse(localStorage.getItem('bookmarks')) || [];
+  listContainer.innerHTML = '';
+  items.forEach((b, i) => {
     const div = document.createElement('div');
     div.className = 'bookmark';
     div.innerHTML = `
-      <a href="${bookmark.url}" target="_blank">${bookmark.name}</a>
-      <button onclick="deleteBookmark(${index})">Delete</button>
+      <div>
+        <a href="${b.url}" target="_blank">${b.name}</a>
+        ${b.tags ? `<small> • ${b.tags}</small>` : ''}
+      </div>
+      <button onclick="deleteBookmark(${i})">Delete</button>
     `;
-    bookmarksList.appendChild(div);
+    listContainer.appendChild(div);
   });
 }
 
-function deleteBookmark(index) {
-  let bookmarks = JSON.parse(localStorage.getItem('bookmarks')) || [];
-  bookmarks.splice(index, 1);
+// 3. Delete  
+function deleteBookmark(idx) {
+  const bookmarks = JSON.parse(localStorage.getItem('bookmarks')) || [];
+  bookmarks.splice(idx, 1);
   localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
   displayBookmarks();
 }
-document.getElementById('searchInput').addEventListener('input', function () {
-  const query = this.value.toLowerCase();
+
+// 4. Search & Filter  
+searchInput.addEventListener('input', () => {
+  const q = searchInput.value.toLowerCase().trim();
   const bookmarks = JSON.parse(localStorage.getItem('bookmarks')) || [];
   const filtered = bookmarks.filter(b =>
-    b.title.toLowerCase().includes(query) ||
-    b.tags.toLowerCase().includes(query)
+    b.name.toLowerCase().includes(q) ||
+    (b.tags && b.tags.includes(q))
   );
-  displayFilteredBookmarks(filtered);
+  displayBookmarks(filtered);
 });
-function displayFilteredBookmarks(bookmarks) {
-  const container = document.getElementById('bookmarkList');
-  container.innerHTML = '';
-  bookmarks.forEach((bookmark, index) => {
-    container.innerHTML += `
-      <div class="bookmark-card">
-        <h3>${bookmark.title}</h3>
-        <a href="${bookmark.url}" target="_blank">${bookmark.url}</a>
-        <p><strong>Tags:</strong> ${bookmark.tags}</p>
-        <p>${bookmark.notes}</p>
-        <button onclick="deleteBookmark(${index})">Delete</button>
-      </div>
-    `;
-  });
-}
-const filtered = bookmarks.filter(b =>
-  (b.title && b.title.toLowerCase().includes(query)) ||
-  (b.tags && b.tags.toLowerCase().includes(query))
-);
-console.log("Query:", query);
-console.log("Filtered Bookmarks:", filtered);
 
-
-
-displayBookmarks(); // Initial call
+// 5. Initial load  
+window.addEventListener('DOMContentLoaded', () => displayBookmarks());
