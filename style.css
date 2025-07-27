@@ -2,73 +2,41 @@ body {
   font-family: 'Segoe UI', sans-serif;
   background: #f4f4f4;
   color: #333;
-  margin: 0;
-  padding: 0;
+  margin: 0; padding: 0;
 }
-
 .container {
   max-width: 600px;
-  margin: auto;
+  margin: 5rem auto;
   padding: 2rem;
   background: #fff;
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  margin-top: 5rem;
   border-radius: 8px;
 }
-
-h1 {
-  text-align: center;
-  color: #0077cc;
-}
-
+h1 { text-align: center; color: #0077cc; }
 form {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+  display: flex; flex-direction: column; gap: 1rem;
   margin-bottom: 2rem;
 }
-
 input, button {
-  padding: 0.8rem;
-  font-size: 1rem;
-  border-radius: 6px;
-  border: 1px solid #ccc;
+  padding: 0.8rem; font-size: 1rem;
+  border-radius: 6px; border: 1px solid #ccc;
 }
-
 button {
-  background: #0077cc;
-  color: white;
-  border: none;
-  cursor: pointer;
-  transition: background 0.3s ease;
+  background: #0077cc; color: #fff; border: none;
+  cursor: pointer; transition: background 0.3s ease;
 }
-
-button:hover {
-  background: #005fa3;
-}
-
+button:hover { background: #005fa3; }
 .bookmark {
-  background: #e8f4fc;
-  padding: 1rem;
-  margin-bottom: 1rem;
-  border-radius: 6px;
-  display: flex;
-  justify-content: space-between;
+  background: #e8f4fc; padding: 1rem;
+  margin-bottom: 1rem; border-radius: 6px;
+  display: flex; justify-content: space-between;
   align-items: center;
 }
-
 .bookmark a {
-  color: #0077cc;
-  text-decoration: none;
-  font-weight: bold;
+  color: #0077cc; text-decoration: none; font-weight: bold;
 }
-
 .bookmark button {
-  background: #ff4d4d;
-  padding: 0.4rem 0.7rem;
-  border: none;
-  border-radius: 4px;
-  color: white;
-  font-size: 0.9rem;
-  cursor: pointer;
+  background: #ff4d4d; padding: 0.4rem 0.7rem;
+  border: none; border-radius: 4px;
+  color: white; font-size: 0.9rem; cursor: pointer;
 }
