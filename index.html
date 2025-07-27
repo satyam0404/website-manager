@@ -1,30 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bookmark Manager</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bookmark Manager</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
-    <div class="container">
-        <h1>🔖 Bookmark Manager</h1>
+  <div class="container">
+    <h1>🔖 Bookmark Manager</h1>
 
-        <form id="bookmark-form">
-            <input type="text" id="site-name" placeholder="Website Name" required />
-            <input type="url" id="site-url" placeholder="Website URL (https://...)" required />
-            <button type="submit">Add Bookmark</button>
-        </form>
-       <input type="text" id="searchInput" placeholder="Search by title or tag" />
-    <div id="bookmarkList"></div>
+    <form id="bookmark-form">
+      <input type="text" id="site-name" placeholder="Website Name" required />
+      <input type="url" id="site-url" placeholder="Website URL (https://…)" required />
+      <input type="text" id="site-tags" placeholder="Tags (comma separated)" />
+      <button type="submit">Add Bookmark</button>
+    </form>
 
+    <input type="text" id="searchInput" placeholder="Search by name or tag" />
 
-        <div id="bookmarks-list"></div>
-    </div>
+    <!-- Single container for displaying bookmarks -->
+    <div id="bookmarks-list"></div>
+  </div>
 
-    <script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
-
 </html>
