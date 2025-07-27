@@ -41,5 +41,15 @@ function deleteBookmark(index) {
   localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
   displayBookmarks();
 }
+document.getElementById('searchInput').addEventListener('input', function () {
+  const query = this.value.toLowerCase();
+  const bookmarks = JSON.parse(localStorage.getItem('bookmarks')) || [];
+  const filtered = bookmarks.filter(b =>
+    b.title.toLowerCase().includes(query) ||
+    b.tags.toLowerCase().includes(query)
+  );
+  displayFilteredBookmarks(filtered);
+});
+
 
 displayBookmarks(); // Initial call
