@@ -50,6 +50,28 @@ document.getElementById('searchInput').addEventListener('input', function () {
   );
   displayFilteredBookmarks(filtered);
 });
+function displayFilteredBookmarks(bookmarks) {
+  const container = document.getElementById('bookmarkList');
+  container.innerHTML = '';
+  bookmarks.forEach((bookmark, index) => {
+    container.innerHTML += `
+      <div class="bookmark-card">
+        <h3>${bookmark.title}</h3>
+        <a href="${bookmark.url}" target="_blank">${bookmark.url}</a>
+        <p><strong>Tags:</strong> ${bookmark.tags}</p>
+        <p>${bookmark.notes}</p>
+        <button onclick="deleteBookmark(${index})">Delete</button>
+      </div>
+    `;
+  });
+}
+const filtered = bookmarks.filter(b =>
+  (b.title && b.title.toLowerCase().includes(query)) ||
+  (b.tags && b.tags.toLowerCase().includes(query))
+);
+console.log("Query:", query);
+console.log("Filtered Bookmarks:", filtered);
+
 
 
 displayBookmarks(); // Initial call
